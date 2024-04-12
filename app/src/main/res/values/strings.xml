@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WhtsApAutoReply</string>
+    <string name="accessibility_service_description">test</string>
+    <string name="whatsapp_suffix" ></string>
+</resources>
