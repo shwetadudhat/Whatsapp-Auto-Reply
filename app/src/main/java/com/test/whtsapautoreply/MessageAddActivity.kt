@@ -1,5 +1,6 @@
 package com.test.whtsapautoreply
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -43,9 +44,9 @@ class MessageAddActivity : AppCompatActivity() {
             val msg = Msgdb(title=binding.etName.text.toString(),description=binding.etMsg.text.toString())
             msgViewModel.insert(msg)
         }
-        // Optionally log ViewModel data
-        msgViewModel.allItems.observe(this, Observer { items ->
-            Log.d("MessageAddActivity", "Received items: ${items.get(0)}")
-        })
+
+        setResult(Activity.RESULT_OK) // Set result OK to indicate success
+        finish() // Finish this activity
+
     }
 }

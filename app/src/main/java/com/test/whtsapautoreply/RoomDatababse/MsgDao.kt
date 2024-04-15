@@ -16,4 +16,7 @@ interface MsgDao {
     fun getAll(): Flow<List<Msgdb>>
     @Query("DELETE FROM msgs_table WHERE id IN (:ids)")
      fun delete(ids: List<Int>)
+    // Query to delete all messages from the messages table
+    @Query("DELETE FROM msgs_table")
+    suspend fun clearAllMessages()
 }

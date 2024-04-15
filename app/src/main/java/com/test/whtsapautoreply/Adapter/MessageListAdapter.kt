@@ -2,20 +2,19 @@ package com.test.whtsapautoreply.Adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.test.whtsapautoreply.R
 import com.test.whtsapautoreply.RoomDatababse.Msgdb
+import com.test.whtsapautoreply.databinding.MessageItemBinding
 
-class MessageListAdapter(private val context: Context, private val messages: List<Msgdb>?) : RecyclerView.Adapter<MessageListAdapter.ViewHolder>() {
+class MessageListAdapter(private val context: Context, private var messages: List<Msgdb>?) : RecyclerView.Adapter<MessageListAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val rootView = LayoutInflater.from(parent.context).inflate(R.layout.message_item, parent, false)
-        return ViewHolder(rootView)
+
+
+        val binding = MessageItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -23,10 +22,22 @@ class MessageListAdapter(private val context: Context, private val messages: Lis
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-//        viewHolder.messageTV.text = messages?.get(position)?.message
+        viewHolder.bind(messages?.get(position) !!)
     }
 
-    class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-//        var messageTV: TextView = itemView.findViewById(R.id.messageTextView) as TextView
+    fun setMessages(messages: List<Msgdb>) {
+        this.messages = messages
+        notifyDataSetChanged() // Notify adapter that the dataset has changed
+    }
+
+    class ViewHolder(private val binding: MessageItemBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(msgdb: Msgdb) {
+            binding.apply {
+                textTitle.text = msgdb.title
+                textDescription.text = msgdb.description
+                // Bind other views here
+            }
+        }
+
     }
 }

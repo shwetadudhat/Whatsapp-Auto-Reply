@@ -34,5 +34,12 @@ class MsgViewModel(private val repository: MsgRepo) :ViewModel() {
         }
     }
 
+    // Function to refresh items by fetching the latest data from the repository
+    fun refreshItems() {
+        viewModelScope.launch {
+            repository.refreshData() // Call a method in your repository to refresh data
+        }
+    }
+
 
 }
