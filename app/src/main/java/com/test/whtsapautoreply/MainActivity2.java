@@ -24,6 +24,14 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
 
+        // Trigger the WhatsApp sending logic
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("phoneNumber")) {
+            String phoneNumber = intent.getStringExtra("phoneNumber");
+            sendWhatsAppMessage(phoneNumber);
+        }
+
+
         this.send = (Button) findViewById(R.id.send);
         this.send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -46,6 +54,27 @@ public class MainActivity2 extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void sendWhatsAppMessage(String phoneNumber) {
+        MainActivity2 mainActivity = MainActivity2.this;
+        if (!mainActivity.isAccessibilityOn(mainActivity.getApplicationContext(), WhatsappAccessibilityService.class)) {
+            MainActivity2.this.startActivity(new Intent("android.settings.ACCESSIBILITY_SETTINGS"));
+            Toast.makeText(MainActivity2.this, "iffff", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Toast.makeText(MainActivity2.this, "elseeee", Toast.LENGTH_SHORT).show();
+        try {
+            Intent sendMsg = new Intent("android.intent.action.VIEW");
+            sendMsg.setPackage("com.whatsapp");
+            sendMsg.setData(Uri.parse("https://api.whatsapp.com/send?phone=" +phoneNumber+"&text=" + URLEncoder.encode("Your Message to Contact Number", "UTF-8")));
+//            sendMsg.setData(Uri.parse("https://api.whatsapp.com/send?phone=/*+91*/" +phoneNumber+"&text=" + URLEncoder.encode("Your Message to Contact Number", "UTF-8")));
+            if (sendMsg.resolveActivity(MainActivity2.this.getPackageManager()) != null) {
+                MainActivity2.this.startActivity(sendMsg);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

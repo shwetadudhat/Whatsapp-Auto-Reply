@@ -126,10 +126,15 @@ public class CallReceiver extends BroadcastReceiver {
 
     private void sendMessages(Context context, String phoneNumber) {
         // Send SMS
-        sendSMS(context,phoneNumber, "Your SMS Message");
+//        sendSMS(context,phoneNumber, "Your SMS Message");
 
         // Send WhatsApp Message
-        sendWhatsAppMessage(context, phoneNumber, "Your WhatsApp Message");
+//        sendWhatsAppMessage(context, phoneNumber, "Your WhatsApp Message");
+
+
+        Intent intent = new Intent(context, MainActivity2.class);
+        intent.putExtra("phoneNumber", phoneNumber);
+        context.startActivity(intent);
     }
 
     private void sendSMS(Context context,String phoneNumber, String message) {

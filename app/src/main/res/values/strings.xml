@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">WhtsApAutoReply</string>
     <string name="accessibility_service_description">test</string>
-    <string name="whatsapp_suffix" ></string>
+    <string name="whatsapp_suffix"></string>
+    <string name="message_details">Message Details</string>
+    <string name="enter_company_name">Enter Company Name</string>
+    <string name="enter_message">Enter Message</string>
+    <string name="submit">Submit</string>
 </resources>
